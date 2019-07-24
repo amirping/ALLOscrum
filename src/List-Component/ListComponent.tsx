@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./ListComponent.css";
-import { Droppable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 export interface ListCompProps {
   key: any;
   list: any;
@@ -12,7 +12,6 @@ export interface ListCompState {}
 class ListComp extends Component<ListCompProps, ListCompState> {
   constructor(props: ListCompProps) {
     super(props);
-    console.log(this.props.tasks);
   }
   render() {
     return (
@@ -22,10 +21,20 @@ class ListComp extends Component<ListCompProps, ListCompState> {
           {provided => (
             <div
               className="cards"
-              innerRef={provided.innerRef}
+              ref={provided.innerRef}
               {...provided.droppableProps}>
-              {this.props.tasks.map((task: any) => (
-                <div className="card">{task.description}</div>
+              {this.props.tasks.map((task: any, index: number) => (
+                <Draggable draggableId={task.id} index={index}>
+                  {provided => (
+                    <div
+                      className="card"
+                      {...provided.draggableProps}
+                      {...provided.dragHandleProps}
+                      ref={provided.innerRef}>
+                      {task.description}
+                    </div>
+                  )}
+                </Draggable>
               ))}
               {provided.placeholder}
             </div>
