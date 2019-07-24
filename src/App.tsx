@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./App.css";
+import uuidV1 from "uuid/v1";
 import SwipeableViews from "react-swipeable-views";
 import AppBarComponent from "./App-Bar-Component/AppBarComponent";
 import {
@@ -15,7 +16,9 @@ import {
   Tabs,
   Tab,
   useTheme,
-  Typography
+  Typography,
+  TextField,
+  Button
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import Board from "./Board-Component/BoradComponent";
@@ -37,23 +40,12 @@ const useStyles = makeStyles((theme: Theme) =>
       border: "2px solid #000",
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 4),
-      outline: "none"
+      outline: "none",
+      marginLeft: "auto",
+      marginTop: "auto"
     }
   })
 );
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  };
-}
 interface TabContainerProps {
   children?: React.ReactNode;
   dir?: string;
@@ -71,15 +63,28 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
   dir: PropTypes.string.isRequired
 };
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`
+  };
+}
 const App: React.FC = () => {
-  const theme = useTheme();
   const [modalStyle] = React.useState(getModalStyle);
+  const listInput = React.createRef<HTMLInputElement>();
+  const taskInput = React.createRef<HTMLInputElement>();
+  const boardElement = React.createRef<Board>();
+  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(0);
   const handleOpen = () => {
     setOpen(true);
   };
-  function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
+  function handleChange(newValue: any) {
     setValue(newValue);
   }
 
@@ -90,7 +95,35 @@ const App: React.FC = () => {
   const handleClose = () => {
     setOpen(false);
   };
-  const classes = useStyles();
+  const classes = useStyles({});
+  function createList() {
+    try {
+      if (
+        listInput &&
+        listInput.current &&
+        listInput.current.value != null &&
+        listInput.current.value.length !== 0
+      ) {
+        console.log(listInput.current.value);
+        const newID = "list-" + uuidV1();
+        const list_data = {
+          id: newID,
+          title: listInput.current.value + "".trim(),
+          tasks: []
+        };
+        if (boardElement && boardElement.current) {
+          boardElement.current.addList(list_data);
+          listInput.current.value = "";
+        }
+      }
+    } catch (error) {
+      alert("we have some trouble");
+    }
+  }
+  function createTask() {
+    if (boardElement && boardElement.current && taskInput && taskInput.current)
+      boardElement.current.addTask({ description: taskInput.current.value });
+  }
   return (
     <div className="mainApp">
       <CssBaseline />
@@ -102,7 +135,7 @@ const App: React.FC = () => {
         className={classes.fab}>
         <AddIcon />
       </Fab>
-      <Board />
+      <Board ref={boardElement} />
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -120,18 +153,42 @@ const App: React.FC = () => {
               indicatorColor="primary"
               textColor="primary"
               centered>
-              <Tab label="Item One" />
-              <Tab label="Item Two" />
-              <Tab label="Item Three" />
+              <Tab label="Create lists" />
+              <Tab label="Create tasks" />
             </Tabs>
           </Paper>
           <SwipeableViews
             axis={theme.direction === "rtl" ? "x-reverse" : "x"}
             index={value}
             onChangeIndex={handleChangeIndex}>
-            <TabContainer dir={theme.direction}>Item One</TabContainer>
-            <TabContainer dir={theme.direction}>Item Two</TabContainer>
-            <TabContainer dir={theme.direction}>Item Three</TabContainer>
+            <TabContainer dir={theme.direction}>
+              <Box flexDirection="column" display="flex">
+                <TextField
+                  id="outlined-l-name"
+                  label="List name"
+                  margin="normal"
+                  variant="outlined"
+                  inputRef={listInput}
+                />
+                <Button variant="contained" onClick={createList}>
+                  Create list
+                </Button>
+              </Box>
+            </TabContainer>
+            <TabContainer dir={theme.direction}>
+              <Box flexDirection="column" display="flex">
+                <TextField
+                  id="outlined-t-name"
+                  label="Task"
+                  margin="normal"
+                  variant="outlined"
+                  inputRef={taskInput}
+                />
+                <Button variant="contained" onClick={createTask}>
+                  Create list
+                </Button>
+              </Box>
+            </TabContainer>
           </SwipeableViews>
         </div>
       </Modal>

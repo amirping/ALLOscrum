@@ -29,7 +29,8 @@ const startData = {
     "tas-5": { id: "tas-5", description: "some data here ras 5" },
     "tas-6": { id: "tas-6", description: "some data here ras 6" },
     "tas-7": { id: "tas-7", description: "some data here ras 7" },
-    "tas-8": { id: "tas-8", description: "some data here ras 8" }
+    "tas-8": { id: "tas-8", description: "some data here ras 8" },
+    "tas-9": { id: "tas-9", description: "some data here ras 9" }
   }
 };
 export default startData;

@@ -11,13 +11,15 @@
     "@types/react-beautiful-dnd": "^11.0.2",
     "@types/react-dom": "16.8.4",
     "@types/react-swipeable-views": "^0.13.0",
+    "@types/uuid": "^3.4.5",
     "react": "^16.8.6",
     "react-beautiful-dnd": "^11.0.5",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1",
     "react-swipeable-views": "^0.13.3",
     "typeface-roboto": "0.0.75",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",
