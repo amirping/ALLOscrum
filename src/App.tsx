@@ -84,7 +84,7 @@ const App: React.FC = () => {
   const handleOpen = () => {
     setOpen(true);
   };
-  function handleChange(newValue: any) {
+  function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
     setValue(newValue);
   }
 
