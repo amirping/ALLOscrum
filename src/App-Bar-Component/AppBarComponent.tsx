@@ -18,7 +18,7 @@ class AppBarComponent extends Component<
   }
   render() {
     return (
-      <AppBar position="static" color="primary">
+      <AppBar position="relative" color="primary">
         <Toolbar>
           <Typography variant="h6" color="inherit">
             {this.state.appname}

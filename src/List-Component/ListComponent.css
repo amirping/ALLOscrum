@@ -1,0 +1,41 @@
+.list {
+    display: flex;
+    flex-direction: column;
+    margin-left: 5px;
+    margin-right: 5px;
+    max-height: 100%;
+    border: 1px solid gray;
+    flex-grow: 1;
+    max-width: 300px;
+    min-width: 100px;
+    border-radius: 2px;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+    color: black;
+    padding: 10px;
+
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}
+
+.card {
+    position: relative;
+    border: 1px solid lightgray;
+    border-radius: 2px;
+    padding: 6px;
+    cursor: grab;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.card:hover {
+    background: gray;
+    transition: background 300ms;
+}

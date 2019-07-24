@@ -3,7 +3,6 @@ import "./App.css";
 import AppBarComponent from "./App-Bar-Component/AppBarComponent";
 import {
   CssBaseline,
-  Container,
   Fab,
   makeStyles,
   Theme,
@@ -11,6 +10,7 @@ import {
   Box
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
+import Board from "./Board-Component/BoradComponent";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     fab: {
@@ -27,22 +27,14 @@ const useStyles = makeStyles((theme: Theme) =>
 const App: React.FC = () => {
   const classes = useStyles();
   return (
-    <React.Fragment>
+    <div className="mainApp">
       <CssBaseline />
       <AppBarComponent />
-      <Container maxWidth={false}>
-        <Fab color="secondary" aria-label="Add" className={classes.fab}>
-          <AddIcon />
-        </Fab>
-        <Box
-          color="text.primary"
-          clone
-          flexDirection="row"
-          justifyContent="around">
-          <div className="list" />
-        </Box>
-      </Container>
-    </React.Fragment>
+      <Fab color="secondary" aria-label="Add" className={classes.fab}>
+        <AddIcon />
+      </Fab>
+      <Board />
+    </div>
   );
 };
 
