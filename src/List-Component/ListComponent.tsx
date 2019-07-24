@@ -24,7 +24,7 @@ class ListComp extends Component<ListCompProps, ListCompState> {
               ref={provided.innerRef}
               {...provided.droppableProps}>
               {this.props.tasks.map((task: any, index: number) => (
-                <Draggable draggableId={task.id} index={index}>
+                <Draggable draggableId={task.id} key={task.id} index={index}>
                   {provided => (
                     <div
                       className="card"

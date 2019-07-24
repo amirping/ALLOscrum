@@ -11,6 +11,10 @@
     border-radius: 2px;
 }
 
+.list:hover {
+    background: rgba(0, 255, 150, .2);
+}
+
 .title {
     width: 100%;
     text-align: center;
