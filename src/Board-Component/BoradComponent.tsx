@@ -42,10 +42,10 @@ class Board extends Component<BoardProps, any> {
     this.setState(newState);
   };
   componentDidUpdate() {
-    console.log(this.state);
+    //console.log(this.state);
   }
   addList = (listobj: any) => {
-    console.log(" we will consider that");
+    //console.log(" we will consider that");
     const newState = {
       ...this.state,
       lists: {
@@ -56,13 +56,13 @@ class Board extends Component<BoardProps, any> {
     this.setState(newState);
   };
   addTask = (taskobj: any) => {
-    console.log("we will conside that also dude");
+    ////console.log("we will conside that also dude");
     taskTC = taskobj;
     this.handleClickOpen();
   };
   onDragEnd = (result: any) => {
     // todo
-    console.log(result);
+    //console.log(result);
     const { destination, source, draggableId } = result;
     if (!destination) {
       return;

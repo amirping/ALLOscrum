@@ -104,7 +104,7 @@ const App: React.FC = () => {
         listInput.current.value != null &&
         listInput.current.value.length !== 0
       ) {
-        console.log(listInput.current.value);
+        //console.log(listInput.current.value);
         const newID = "list-" + uuidV1();
         const list_data = {
           id: newID,
